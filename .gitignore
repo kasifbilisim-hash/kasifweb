@@ -39,3 +39,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+!.env.example
+
+# Yerel geliştirme dosya depolaması (BLOB_READ_WRITE_TOKEN yokken)
+/.uploads
+
+# Ekran görüntüleri (geliştirme sırasında alınanlar, 11 MB)
+/docs/ekran/
+
+# Üçüncü taraf ajan skill dosyaları ve yerel ajan ayarları (skills-lock.json ile yeniden kurulabilir)
+/.claude/

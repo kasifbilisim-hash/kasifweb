@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Üçüncü taraf ajan skill dosyaları (Cloudflare security-audit): projenin kodu değil.
+    ".claude/**",
   ]),
 ]);
 

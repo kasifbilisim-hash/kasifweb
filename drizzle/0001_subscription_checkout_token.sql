@@ -1,0 +1,2 @@
+ALTER TABLE "subscriptions" ADD COLUMN "iyzico_checkout_token" text;--> statement-breakpoint
+ALTER TABLE "subscriptions" ADD CONSTRAINT "subscriptions_iyzico_checkout_token_unique" UNIQUE("iyzico_checkout_token");

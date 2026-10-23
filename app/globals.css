@@ -1,26 +1,261 @@
 @import "tailwindcss";
 
+/* Tasarım token'ları: docs/TASARIM.md */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --duvar: #e6e4df;
+  --kagit: #f6f5f1; /* açık zemin: bölüm ve kart yüzeyi */
+  --cizgi: #d8d5cc; /* ince ayırıcı çizgi */
+  --emaye: #12372a;
+  --gece: #0a2319; /* koyu bölümler: emayenin derin tonu */
+  --tabela: #f2b705;
+  --tabela-acik: #fdf0c2;
+  --murekkep: #1a1a18;
+  --beyaz: #ffffff;
+  --soluk: #55554f; /* duvar üzerinde ikincil metin, kontrast 6:1 */
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-duvar: var(--duvar);
+  --color-kagit: var(--kagit);
+  --color-cizgi: var(--cizgi);
+  --color-emaye: var(--emaye);
+  --color-gece: var(--gece);
+  --color-tabela: var(--tabela);
+  --color-tabela-acik: var(--tabela-acik);
+  --color-murekkep: var(--murekkep);
+  --color-beyaz: var(--beyaz);
+  --color-soluk: var(--soluk);
+  --font-display: var(--font-archivo), sans-serif;
+  --font-body: var(--font-figtree), system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--duvar);
+  color: var(--murekkep);
+  scroll-padding-top: 6rem;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+/* Tabela harfi: geniş ve ağır Archivo */
+.display {
+  font-family: var(--font-display);
+  font-stretch: 125%;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.ui {
+  font-family: var(--font-display);
+  font-stretch: 100%;
+  font-weight: 600;
+}
+
+/* Levha: sert gölgeli, köşesi keskin yüzey */
+.levha {
+  box-shadow: 8px 8px 0 var(--murekkep);
+}
+
+:focus-visible {
+  outline: 3px solid var(--tabela);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px var(--emaye);
+}
+
+.on-emaye :focus-visible,
+.on-gece :focus-visible {
+  box-shadow: 0 0 0 6px var(--murekkep);
+}
+
+/* Tek giriş anı: yalnızca ana sayfa başlığı */
+@keyframes tabela-gir {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.giris {
+  animation: tabela-gir 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .giris {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Açılış ekranı: kepenk. Yalnızca CSS; bkz. components/kepenk.tsx */
+.kepenk {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  background: #0a2319;
+  /* Bekle, hafifçe aşağı sallan (kepenk çekilirken olduğu gibi), sonra hızlanarak yukarı kay */
+  animation: kepenk-yukari 0.9s cubic-bezier(0.6, 0.02, 0.9, 0.4) 0.35s both;
+}
+.kepenk-lama {
+  flex: 1 1 0;
+  border-bottom: 3px solid #0a2319;
+}
+.kepenk-lama-a {
+  background: #12372a;
+  box-shadow: inset 0 3px 0 #1d4a39;
+}
+.kepenk-lama-b {
+  background: #0f3024;
+  box-shadow: inset 0 3px 0 #1a4234;
+}
+@keyframes kepenk-yukari {
+  0% {
+    transform: translateY(0);
+    visibility: visible;
+  }
+  14% {
+    transform: translateY(14px);
+  }
+  99.9% {
+    visibility: visible;
+  }
+  100% {
+    transform: translateY(-105%);
+    visibility: hidden;
+  }
+}
+.kepenk-yok .kepenk {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .kepenk {
+    display: none;
+  }
+}
+
+/* Sayfa geçişi: kepenk aşağı iner, yeni sayfa yüklenince yukarı kayar. bkz. components/page-transition.tsx */
+.kg {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  visibility: hidden;
+  transform: translateY(-105%);
+  background: #0a2319;
+}
+.kg[data-phase="kapaniyor"] {
+  visibility: visible;
+  pointer-events: auto;
+  animation: kg-in 0.26s cubic-bezier(0.3, 0.7, 0.3, 1) both;
+}
+.kg[data-phase="bekliyor"] {
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.kg[data-phase="aciliyor"] {
+  visibility: visible;
+  animation: kg-out 0.42s cubic-bezier(0.6, 0.02, 0.9, 0.4) both;
+}
+@keyframes kg-in {
+  from {
+    transform: translateY(-105%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes kg-out {
+  0% {
+    transform: translateY(0);
+  }
+  12% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(-105%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kg {
+    display: none;
+  }
+}
+
+/* Blog ve uzun metin: yönetimden girilen Markdown bu sınıfla biçimlenir */
+.metin {
+  font-size: 1.125rem;
+  line-height: 1.75;
+}
+.metin > * + * {
+  margin-top: 1.1em;
+}
+.metin h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.6rem;
+  line-height: 1.2;
+  margin-top: 2em;
+  color: var(--emaye);
+}
+.metin h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin-top: 1.6em;
+}
+.metin ul,
+.metin ol {
+  padding-left: 1.4em;
+}
+.metin ul {
+  list-style: disc;
+}
+.metin ol {
+  list-style: decimal;
+}
+.metin li + li {
+  margin-top: 0.4em;
+}
+.metin a {
+  color: var(--emaye);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.metin blockquote {
+  border-left: 4px solid var(--tabela);
+  padding-left: 1.1em;
+  color: var(--soluk);
+}
+.metin strong {
+  font-weight: 700;
+}
+.metin code {
+  background: var(--kagit);
+  padding: 0.1em 0.35em;
+  font-size: 0.92em;
+}
+.metin table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.97em;
+}
+.metin th,
+.metin td {
+  border: 1px solid var(--cizgi);
+  padding: 0.5em 0.7em;
+  text-align: left;
+}
+.metin th {
+  background: var(--kagit);
 }
