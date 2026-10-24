@@ -1,4 +1,4 @@
-# kasifyazilim.com — Aşama Planı
+# kasifyazilim.com.tr — Aşama Planı
 
 Kullanım: Her aşamada Claude Code'a "docs/PLAN.md içindeki Aşama X'i uygula" de.
 Bir aşama bitip sen kontrol etmeden diğerine geçme. Her aşama sonunda commit at.
@@ -24,7 +24,7 @@ Bir aşama bitip sen kontrol etmeden diğerine geçme. Her aşama sonunda commit
 
 ```
 CLAUDE.md'yi ve docs/referans/ altındaki görselleri incele. frontend-design skill'ini kullan.
-kasifyazilim.com için 3 farklı tasarım yönü öner. Her biri için:
+kasifyazilim.com.tr için 3 farklı tasarım yönü öner. Her biri için:
 font çifti, renk paleti (hex), düzen yaklaşımı, ana sayfanın ilk ekranının kaba tarifi,
 ve bu yönün neden "şablon/AI" gibi görünmeyeceği.
 Hedef kitle: Türkiye'de web sitesi ve Google reklamı ihtiyacı olan KOBİ'ler, esnaf, firmalar.
@@ -160,6 +160,6 @@ Tüm akışı sandbox test kartlarıyla uçtan uca dene ve sonucu raporla.
 ## Sonraki projeler (bu repoda değil)
 
 - Müşteri siteleri için ortak çekirdek: içerik yönetim paneli + "Destek / Aboneliğim"
-  linki (kasifyazilim.com/panel'e yönlendirir)
+  linki (kasifyazilim.com.tr/panel'e yönlendirir)
 - Müşteri panelinde aylık Google Ads raporu (Google Ads API onayı gerekir)
 - Sektörel demo siteler, otomatik e-fatura (Paraşüt vb.), referans programı

@@ -97,7 +97,7 @@ export function PanelMock() {
     ["Yayın", "bekliyor"],
   ];
   return (
-    <BrowserFrame url="kasifyazilim.com/panel/proje">
+    <BrowserFrame url="kasifyazilim.com.tr/panel/proje">
       <div className="grid gap-4 bg-kagit p-4 sm:grid-cols-[1fr_1.1fr]">
         <ol className="space-y-1.5 border-l-4 border-murekkep text-sm">
           {steps.map(([label, s]) => (

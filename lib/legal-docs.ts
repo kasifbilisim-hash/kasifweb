@@ -13,10 +13,10 @@ const c = company;
 
 const providerBlock = [
   `Unvan: ${c.legalName} (${c.tradeName})`,
-  `Vergi dairesi ve numarası: ${c.taxOffice} / ${c.taxNumber}`,
-  `MERSİS numarası: ${c.mersis}`,
+  `Vergi dairesi${c.taxNumber ? " ve numarası" : ""}: ${c.taxOffice}${c.taxNumber ? ` / ${c.taxNumber}` : ""}`,
+  ...(c.mersis ? [`MERSİS numarası: ${c.mersis}`] : []),
   `Adres: ${c.address}`,
-  `KEP adresi: ${c.kep}`,
+  ...(c.kep ? [`KEP adresi: ${c.kep}`] : []),
   `Telefon: ${c.phone}`,
   `E-posta: ${c.email}`,
   `İnternet sitesi: ${c.website}`,
@@ -205,7 +205,7 @@ export const onBilgilendirme: LegalDoc = {
       paragraphs: [
         "Cayma bildiriminizi aşağıdaki kanallardan birine, cayma süresi dolmadan iletin. Bildirimde unvanınızı, e-posta adresinizi, sipariş tarihini ve caydığınızı açıkça belirtin:",
       ],
-      list: [`E-posta: ${c.email}`, `KEP: ${c.kep}`, `Posta: ${c.address}`, "Panel: Destek > Yeni talep > Fatura ve ödeme"],
+      list: [`E-posta: ${c.email}`, ...(c.kep ? [`KEP: ${c.kep}`] : []), `Posta: ${c.address}`, "Panel: Destek > Yeni talep > Fatura ve ödeme"],
     },
     {
       heading: "Memnuniyet iptali (sözleşmesel hak)",
@@ -382,7 +382,7 @@ export const kvkk: LegalDoc = {
     {
       heading: "Başvuru yöntemi",
       paragraphs: [
-        `Haklarınıza ilişkin taleplerinizi, kimliğinizi tespit edecek bilgilerle birlikte yazılı olarak ${c.address} adresine, ${c.kep} KEP adresine veya ${c.email} e-posta adresine iletebilirsiniz. Başvurunuz, talebin niteliğine göre en geç otuz gün içinde ücretsiz olarak sonuçlandırılır; işlemin ayrıca maliyet gerektirmesi halinde Kurul tarafından belirlenen tarifedeki ücret alınabilir.`,
+        `Haklarınıza ilişkin taleplerinizi, kimliğinizi tespit edecek bilgilerle birlikte yazılı olarak ${c.address} adresine${c.kep ? `, ${c.kep} KEP adresine` : ""} veya ${c.email} e-posta adresine iletebilirsiniz. Başvurunuz, talebin niteliğine göre en geç otuz gün içinde ücretsiz olarak sonuçlandırılır; işlemin ayrıca maliyet gerektirmesi halinde Kurul tarafından belirlenen tarifedeki ücret alınabilir.`,
       ],
     },
   ],
@@ -436,7 +436,7 @@ export const gizlilik: LegalDoc = {
 export const kullanimKosullari: LegalDoc = {
   slug: "kullanim-kosullari",
   title: "Site kullanım koşulları",
-  description: "kasifyazilim.com sitesinin kullanım koşulları.",
+  description: "kasifyazilim.com.tr sitesinin kullanım koşulları.",
   sections: [
     {
       heading: "Genel",

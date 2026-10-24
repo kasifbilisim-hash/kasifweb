@@ -16,7 +16,7 @@ Kapsam: kod incelemesi + canlı yoklamalar (geliştirme sunucusu). Gerçek iyzic
 | Önem | Bulgu | Öneri |
 |---|---|---|
 | Orta | E-posta doğrulaması yok. Herkes başkasının e-postasıyla hesap açabilir (ön-kayıt); kayıt ekranı "User already exists" diyerek hesabın varlığını gösterir (kullanıcı numaralandırma, saatte 10 deneme sınırlı) | Resend bağlanınca `requireEmailVerification` aç, abonelik başlatmadan önce doğrulama iste |
-| Orta | Yönetim paneli sitenin aynı kökeninde (`/yonetim`). Sitede bir XSS bulunursa yönetici oturumu ele geçirilebilir | Paneli alt alan adına (admin.kasifyazilim.com) taşı, yönetici için 2 adımlı doğrulama (Better Auth 2FA) ve kısa oturum süresi |
+| Orta | Yönetim paneli sitenin aynı kökeninde (`/yonetim`). Sitede bir XSS bulunursa yönetici oturumu ele geçirilebilir | Paneli alt alan adına (admin.kasifyazilim.com.tr) taşı, yönetici için 2 adımlı doğrulama (Better Auth 2FA) ve kısa oturum süresi |
 | Orta | İçerik güvenlik politikası (CSP) yok. iyzico ödeme formu kendi betiklerini yüklediği için sandbox'ta denenmeden eklenemedi | Sandbox çalışınca `Content-Security-Policy-Report-Only` ile başla, sonra sıkılaştır |
 | Düşük | Yönetici oturumu varsayılan 7 gün | Yönetici için 8 saat gibi kısa süre |
 | Düşük | Hız sınırı IP'yi `x-forwarded-for`'dan alır. Vercel'de platform doldurur, kendi sunucuda sahte gönderilebilir. Hız sınırı veritabanı hatasında isteği geçirir (kilitlenmesin diye bilinçli) | Yalnızca Vercel'de yayınla; kendi sunucuda ters proxy ayarı yap |

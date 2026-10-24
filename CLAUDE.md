@@ -1,4 +1,4 @@
-# Kaşif Yazılım — kasifyazilim.com
+# Kaşif Yazılım — kasifyazilim.com.tr
 
 Kurumsal web sitesi + Google Ads hizmetini **aylık abonelikle** satan firmanın sitesi.
 Müşteri paket seçer, iyzico ile abone olur, ardından ekibimiz sitesini yapar.

@@ -1,14 +1,13 @@
 export const site = {
   name: "Kaşif Yazılım",
-  url: "https://kasifyazilim.com",
+  url: "https://kasifyazilim.com.tr",
   description:
     "Kurumsal web sitenizi ve Google reklamlarınızı abonelik ya da tek seferlik paketle kuruyor ve yönetiyoruz.",
-  // [İÇERİK: iletişim bilgileri]
-  email: "[İÇERİK: e-posta]",
+  email: "info@kasifbilisim.com.tr",
   phone: "+90 549 100 34 27",
   // WhatsApp için ayrı numara gerekirse buraya yazın; boşsa telefonla aynı numara kullanılır.
   whatsapp: "",
-  address: "[İÇERİK: adres]",
+  address: "ŞAHİNTEPE MAH. 133383 NOLU CAD. UĞUR ÇARŞI A BLOK NO: 6 A/D ŞAHİNBEY/GAZİANTEP",
 } as const;
 
 /**
@@ -17,19 +16,19 @@ export const site = {
  */
 export const company = {
   tradeName: "Kaşif Yazılım",
-  legalName: "[İÇERİK: ticari unvan]",
-  mersis: "[İÇERİK: MERSİS no]",
-  taxOffice: "[İÇERİK: vergi dairesi]",
-  taxNumber: "[İÇERİK: vergi no]",
-  address: "[İÇERİK: adres]",
-  kep: "[İÇERİK: KEP adresi]",
+  legalName: "Serhat Akçakıl",
+  mersis: "", // şahıs işletmesi: MERSİS yok
+  taxOffice: "Şahinbey",
+  taxNumber: "", // şahıs işletmesi: T.C. kimlik no kesinlikle yayımlanmaz,
+  address: "ŞAHİNTEPE MAH. 133383 NOLU CAD. UĞUR ÇARŞI A BLOK NO: 6 A/D ŞAHİNBEY/GAZİANTEP",
+  kep: "",
   phone: "+90 549 100 34 27",
-  email: "[İÇERİK: e-posta]",
-  website: "kasifyazilim.com",
+  email: "info@kasifbilisim.com.tr",
+  website: "kasifyazilim.com.tr",
 } as const;
 
 /** Taahhütnamede ve sözleşmelerde tek satırda gösterilen kimlik. */
-export const companyLine = `${company.legalName} (${company.tradeName}), Vergi Dairesi/No: ${company.taxOffice} / ${company.taxNumber}, MERSİS: ${company.mersis}, Adres: ${company.address}`;
+export const companyLine = `${company.legalName} (${company.tradeName}), Vergi Dairesi: ${company.taxOffice}${company.taxNumber ? ` / ${company.taxNumber}` : ""}${company.mersis ? `, MERSİS: ${company.mersis}` : ""}, Adres: ${company.address}`;
 
 /**
  * Özellik anahtarları. blog: false iken /blog ve yazı sayfaları 404 verir; menüde, alt bilgide, ana sayfada ve
