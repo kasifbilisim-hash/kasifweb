@@ -65,8 +65,10 @@ Sayfa bittiğinde ekran görüntüsünü al (Playwright MCP), yukarıdaki yasak 
 
 ## Güncelleme (tasarım ve yapı)
 
-- Site, yönetim panelinden **bağımsızdır**: `app/(site)` üst menü/alt bilgiyle, `app/(admin)` kendi yan menülü kabuğuyla gelir (`app/(admin)/yonetim/admin.css`).
+- Site, yönetim panelinden **bağımsızdır**: `app/(site)` üst menü/alt bilgiyle, `app/(admin)` kendi yan menülü kabuğuyla gelir (`app/app-shell.css`; müşteri paneli `/panel` de aynı şekilde `app/(panel)` grubunda kendi kabuğuyla gelir).
 - Site ilk sürümde fazla sade bulundu: akinsoft.com gibi tam bir kurumsal yazılım firması görünümü hedeflenir. Yukarıdaki "yasak" listesi (gradyan, blob, glass, uydurma rakam/yorum, stok fotoğraf) geçerli kalır; zenginlik ürün çizimleriyle (`components/visuals.tsx`), bölüm ritmiyle ve içerikle sağlanır.
 - Paketlerin tamamı (ad, özet, madde listesi, fiyat, sıra, reklam içerir mi) veritabanında ve yönetimden düzenlenir; yeni paket eklenebilir. Hiçbir paket slug'ı kodda sabit değildir.
 - Blog yazıları veritabanında (Markdown), yönetimden yazılır. Hukuki metinler `lib/legal-docs.ts` içindedir.
 - Logo: markanın kendi tasarımı (`public/logo/*`, K işareti + KAŞİF YAZILIM yazısı; koyu, beyaz ve sarı varyantlar). Bileşen: `components/logo.tsx`. Favicon `app/icon.png`. Logoyu yeniden çizme, orijinali kullan.
+
+- Sitenin tek amacı: **telefon araması ya da WhatsApp yönlendirmesi**. Bütün çağrı düğmeleri `components/contact-buttons.tsx`, numara `lib/site.ts` (`site.phone`, `site.whatsapp`); iletişim formu kaldırıldı. Yeni sayfa/bölüm eklerken CTA olarak `ContactPair` kullan, `/abonelik` ya da form bağlantısı koyma.

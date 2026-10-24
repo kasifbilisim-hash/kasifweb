@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
+import { ContactPair } from "@/components/contact-buttons";
 import { Faq, faqJsonLd } from "@/components/faq";
 import { PageHead } from "@/components/page-head";
 import { CtaBand, SectionHead } from "@/components/sections";
@@ -26,7 +28,7 @@ function Visual({ slug }: { slug: string }) {
   return <SiteMock variant="mobilya" />;
 }
 
-export default async function HizmetPage({ params }: PageProps<"/hizmetler/[slug]">) {
+async function Service({ params }: { params: PageProps<"/hizmetler/[slug]">["params"] }) {
   const { slug } = await params;
   const s = getService(slug);
   if (!s) notFound();
@@ -35,9 +37,8 @@ export default async function HizmetPage({ params }: PageProps<"/hizmetler/[slug
   return (
     <>
       <PageHead eyebrow="Hizmetler" title={s.title} lead={s.lead}>
-        <div className="mt-8 flex flex-wrap gap-4">
-          <Link href="/paketler" className="ui bg-emaye px-7 py-4 text-lg text-beyaz hover:bg-murekkep">Paketleri gör</Link>
-          <Link href="/iletisim" className="ui border-2 border-murekkep px-7 py-4 text-lg hover:bg-murekkep hover:text-beyaz">Soru sorun</Link>
+        <div className="mt-8">
+          <ContactPair message={`Merhaba, "${s.title}" hakkında bilgi almak istiyorum.`} />
         </div>
       </PageHead>
 
@@ -106,5 +107,13 @@ export default async function HizmetPage({ params }: PageProps<"/hizmetler/[slug
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(faqJsonLd(s.faq)) }} />
       <CtaBand />
     </>
+  );
+}
+
+export default function HizmetPage({ params }: PageProps<"/hizmetler/[slug]">) {
+  return (
+    <Suspense fallback={null}>
+      <Service params={params} />
+    </Suspense>
   );
 }

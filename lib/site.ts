@@ -5,7 +5,9 @@ export const site = {
     "Kurumsal web sitenizi ve Google reklamlarınızı abonelik ya da tek seferlik paketle kuruyor ve yönetiyoruz.",
   // [İÇERİK: iletişim bilgileri]
   email: "[İÇERİK: e-posta]",
-  phone: "[İÇERİK: telefon]",
+  phone: "+90 549 100 34 27",
+  // WhatsApp için ayrı numara gerekirse buraya yazın; boşsa telefonla aynı numara kullanılır.
+  whatsapp: "",
   address: "[İÇERİK: adres]",
 } as const;
 
@@ -21,7 +23,7 @@ export const company = {
   taxNumber: "[İÇERİK: vergi no]",
   address: "[İÇERİK: adres]",
   kep: "[İÇERİK: KEP adresi]",
-  phone: "[İÇERİK: telefon]",
+  phone: "+90 549 100 34 27",
   email: "[İÇERİK: e-posta]",
   website: "kasifyazilim.com",
 } as const;

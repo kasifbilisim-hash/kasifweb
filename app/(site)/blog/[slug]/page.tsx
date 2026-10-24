@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import Markdown from "react-markdown";
 import { CtaBand } from "@/components/sections";
 import { formatPostDate, getPostBySlug, getPublishedPosts, getRelatedPosts } from "@/lib/blog";
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }: PageProps<"/blog/[slug]">): P
   };
 }
 
-export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">) {
+async function BlogPost({ params }: { params: PageProps<"/blog/[slug]">["params"] }) {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
   if (!post) notFound();
@@ -65,7 +66,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
             <p className="mt-2">Paketlerimizi ve koşulları inceleyin ya da sorunuzu yazın.</p>
             <p className="mt-4 flex flex-wrap gap-5">
               <Link href="/paketler" className="ui underline underline-offset-4">Paketler</Link>
-              <Link href="/iletisim" className="ui underline underline-offset-4">Bize yazın</Link>
+              <Link href="/iletisim" className="ui underline underline-offset-4">Bizi arayın</Link>
             </p>
           </aside>
         </div>
@@ -92,5 +93,13 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }} />
       <CtaBand />
     </>
+  );
+}
+
+export default function BlogPostPage({ params }: PageProps<"/blog/[slug]">) {
+  return (
+    <Suspense fallback={null}>
+      <BlogPost params={params} />
+    </Suspense>
   );
 }

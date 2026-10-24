@@ -24,7 +24,7 @@ async function Result({ searchParams }: { searchParams: Promise<{ durum?: string
       <p className="mt-6 max-w-xl text-xl">
         {ok
           ? "Sıradaki adım taahhütnamenin imzalanıp yüklenmesi. Onaylanmadan tasarım aşamasına geçmiyoruz."
-          : "Kartınızdan çekim yapılmadıysa tekrar deneyebilirsiniz. Çekim yapıldığı halde bu ekranı görüyorsanız bize yazın, durumu kontrol edelim."}
+          : "Kartınızdan çekim yapılmadıysa tekrar deneyebilirsiniz. Çekim yapıldığı halde bu ekranı görüyorsanız bizi arayın, durumu kontrol edelim."}
       </p>
       <div className="mt-8 flex flex-wrap gap-6">
         <Link href="/panel" className="ui bg-emaye px-7 py-4 text-lg text-beyaz hover:bg-murekkep">

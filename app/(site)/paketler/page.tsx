@@ -46,7 +46,7 @@ export default async function PaketlerPage() {
           </dl>
         </div>
       </section>
-      <CtaBand title="Hangi paket size uygun, emin değil misiniz?" text="Sorularınızı yazın, işinize uygun paketi birlikte seçelim." />
+      <CtaBand title="Hangi paket size uygun, emin değil misiniz?" text="Bizi arayın ya da WhatsApp'tan yazın, işinize uygun paketi birlikte seçelim." />
     </>
   );
 }

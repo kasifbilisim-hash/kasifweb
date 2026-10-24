@@ -57,7 +57,7 @@ export function HeroSlider({ slides, labels }: { slides: ReactNode[]; labels: st
       onFocusCapture={() => setHeld(true)}
       onBlurCapture={() => setHeld(false)}
     >
-      <div ref={track} onScroll={onScroll} className="flex snap-x snap-mandatory overflow-x-auto overflow-y-hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" aria-live={playing && !held && !reduced ? "off" : "polite"}>
+      <div ref={track} onScroll={onScroll} className="relative flex snap-x snap-mandatory overflow-x-auto overflow-y-hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" aria-live={playing && !held && !reduced ? "off" : "polite"}>
         {slides.map((s, i) => (
           <div key={i} role="group" aria-roledescription="slayt" aria-label={`${i + 1} / ${n}: ${labels[i]}`} inert={i !== current} className="w-full shrink-0 snap-start">
             {s}

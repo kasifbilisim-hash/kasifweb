@@ -6,7 +6,7 @@ import { SignOutButton } from "@/components/auth/sign-out-button";
 import { db, schema } from "@/lib/db";
 import { LogoMark } from "@/components/logo";
 import { requireAdmin } from "@/lib/session";
-import "./admin.css";
+import "../../app-shell.css";
 import { AdminNav } from "./admin-nav";
 
 export const metadata: Metadata = { title: { default: "Yönetim", template: "%s | Yönetim" }, robots: { index: false, follow: false } };

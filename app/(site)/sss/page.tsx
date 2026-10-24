@@ -23,7 +23,7 @@ const all = groups.flatMap((g) => g.items);
 export default function SssPage() {
   return (
     <>
-      <PageHead eyebrow="Yardım" title="Sık sorulan sorular" lead="Aradığınızı bulamazsanız bize yazın, panelinizdeki destek bölümünden de sorabilirsiniz." />
+      <PageHead eyebrow="Yardım" title="Sık sorulan sorular" lead="Aradığınızı bulamazsanız bizi arayın ya da WhatsApp'tan yazın." />
       <section className="mx-auto max-w-4xl space-y-14 px-5 py-16">
         {groups.map((g) => (
           <div key={g.title}>
@@ -31,7 +31,7 @@ export default function SssPage() {
             <Faq items={g.items} />
           </div>
         ))}
-        <p className="text-lg">Hâlâ sorunuz mu var? <Link href="/iletisim" className="underline underline-offset-4">Bize yazın</Link>.</p>
+        <p className="text-lg">Hâlâ sorunuz mu var? <Link href="/iletisim" className="underline underline-offset-4">Bizi arayın ya da WhatsApp&apos;tan yazın</Link>.</p>
       </section>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(faqJsonLd(all)) }} />
       <CtaBand />

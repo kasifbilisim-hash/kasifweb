@@ -74,7 +74,7 @@ export default function ReferanslarPage() {
             ))}
           </div>
           <p className="mt-16 text-lg">
-            Kendi siteniz için neler yapabileceğimizi konuşmak ister misiniz? <Link href="/iletisim" className="underline underline-offset-4">Bize yazın</Link>.
+            Kendi siteniz için neler yapabileceğimizi konuşmak ister misiniz? <Link href="/iletisim" className="underline underline-offset-4">Bizi arayın ya da WhatsApp&apos;tan yazın</Link>.
           </p>
         </div>
       </section>

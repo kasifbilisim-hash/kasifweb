@@ -14,18 +14,14 @@ const LINKS = [
 export function PanelNav() {
   const pathname = usePathname();
   return (
-    <nav aria-label="Panel" className="border-b-2 border-murekkep bg-beyaz">
-      <ul className="mx-auto flex max-w-6xl flex-wrap gap-x-6 gap-y-1 px-5">
+    <nav aria-label="Panel">
+      <ul className="space-y-0.5">
         {LINKS.map((l) => {
           const current = l.href === "/panel" ? pathname === "/panel" : pathname.startsWith(l.href);
           return (
             <li key={l.href}>
-              <Link
-                href={l.href}
-                aria-current={current ? "page" : undefined}
-                className={`ui block border-b-4 py-3 ${current ? "border-tabela" : "border-transparent hover:border-murekkep"}`}
-              >
-                {l.label}
+              <Link href={l.href} aria-current={current ? "page" : undefined} className="adm-link">
+                <span>{l.label}</span>
               </Link>
             </li>
           );

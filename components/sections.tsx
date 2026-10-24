@@ -1,6 +1,7 @@
-import Link from "next/link";
 import type { ReactNode } from "react";
+import { packageWaMessage } from "@/lib/contact";
 import { domainFeeLine, formatTL, type PackageInfo } from "@/lib/packages";
+import { ContactPair } from "./contact-buttons";
 
 export function SectionHead({ title, lead, light = false, id }: { title: string; lead?: string; light?: boolean; id?: string }) {
   return (
@@ -12,7 +13,7 @@ export function SectionHead({ title, lead, light = false, id }: { title: string;
 }
 
 /** Sayfa sonu çağrısı. */
-export function CtaBand({ title = "Sitenizi ve reklamınızı bu ay kuralım.", text = "Paketi seçin, aboneliği başlatın, geri kalanı ekibimiz yürütsün.", children }: { title?: string; text?: string; children?: ReactNode }) {
+export function CtaBand({ title = "Sitenizi ve reklamınızı bu ay kuralım.", text = "Bizi arayın ya da WhatsApp'tan yazın, size uygun paketi birlikte seçelim.", children }: { title?: string; text?: string; children?: ReactNode }) {
   return (
     <section className="bg-tabela">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-6 px-5 py-14">
@@ -21,12 +22,7 @@ export function CtaBand({ title = "Sitenizi ve reklamınızı bu ay kuralım.", 
           <p className="mt-3 text-lg text-murekkep/85">{text}</p>
         </div>
         <div className="flex flex-wrap gap-4">
-          {children ?? (
-            <>
-              <Link href="/paketler" className="ui bg-murekkep px-7 py-4 text-lg text-beyaz hover:bg-emaye">Paketleri gör</Link>
-              <Link href="/iletisim" className="ui border-2 border-murekkep px-7 py-4 text-lg hover:bg-murekkep hover:text-beyaz">Bize yazın</Link>
-            </>
-          )}
+          {children ?? <ContactPair surface="yellow" />}
         </div>
       </div>
     </section>
@@ -71,13 +67,7 @@ export function PackageGrid({ packages }: { packages: PackageInfo[] }) {
               </ul>
             ) : null}
             <div className="mt-auto pt-8">
-              {open && pkg.billingType === "one_time" ? (
-                <Link href="/iletisim" className="ui inline-block bg-murekkep px-7 py-4 text-beyaz hover:bg-emaye">Teklif al</Link>
-              ) : open ? (
-                <Link href={`/abonelik/${pkg.slug}`} className="ui inline-block bg-murekkep px-7 py-4 text-beyaz hover:bg-emaye">Abone ol</Link>
-              ) : (
-                <span className="ui inline-block bg-murekkep/60 px-7 py-4 text-beyaz">Fiyat yakında açıklanacak</span>
-              )}
+              <ContactPair surface={pkg.featured ? "yellow" : "light"} size="md" message={packageWaMessage(pkg.name)} />
             </div>
           </article>
         );

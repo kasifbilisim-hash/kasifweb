@@ -1,9 +1,12 @@
 import Link from "next/link";
+import { HeroScene } from "@/components/animated-visuals";
+import { ContactPair } from "@/components/contact-buttons";
 import { HeroSlider } from "@/components/hero-slider";
 import { CtaBand, PackageGrid, SectionHead } from "@/components/sections";
 import { Faq, faqItems } from "@/components/faq";
 import { AdsMock, PanelMock, Pictogram, SiteMock } from "@/components/visuals";
 import { formatPostDate, getPublishedPosts } from "@/lib/blog";
+import { packageWaMessage } from "@/lib/contact";
 import { domainFeeLine, formatTL, getPackages } from "@/lib/packages";
 
 const steps = [
@@ -36,9 +39,12 @@ export default async function Home() {
         <p className="mt-7 max-w-xl text-xl text-beyaz/85">
           Firmanıza özel tasarlanmış web sitesi, Google Ads yönetimi ve sonrasında bakım. Aylık abonelik ya da tek seferlik ödeme: ihtiyacınıza göre paketi siz seçersiniz.
         </p>
-        <div className="mt-9 flex flex-wrap items-center gap-4">
-          <Link href="/paketler" className="ui bg-tabela px-8 py-4 text-lg text-murekkep hover:bg-beyaz">Paketleri gör</Link>
-          <Link href="/nasil-calisir" className="ui border-2 border-beyaz/50 px-8 py-4 text-lg hover:bg-beyaz hover:text-gece">Nasıl çalışır</Link>
+        <div className="mt-9">
+          <ContactPair surface="dark" />
+          <p className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-beyaz/85">
+            <Link href="/paketler" className="ui underline underline-offset-4 hover:text-tabela">Paketleri gör</Link>
+            <Link href="/nasil-calisir" className="ui underline underline-offset-4 hover:text-tabela">Nasıl çalışır</Link>
+          </p>
         </div>
         <ul className="mt-9 flex flex-wrap gap-x-7 gap-y-2 text-beyaz/85">
           {["Açık fiyat, saklı koşul yok", "Alan adı sizde kalır", "Reklam bütçesi size ait"].map((t) => (
@@ -49,11 +55,7 @@ export default async function Home() {
           ))}
         </ul>
       </div>
-      <figure className="relative mx-auto w-full max-w-xl pb-10 pr-4 lg:pb-14">
-        <div className="rotate-[-1.5deg]"><SiteMock variant="mobilya" /></div>
-        <div className="absolute -bottom-2 right-0 w-[62%] rotate-[2deg] shadow-[8px_8px_0_#f2b705]"><AdsMock /></div>
-        <figcaption className="mt-6 text-sm text-beyaz/60">Örnek tasarım ve örnek reklam görünümü. Müşteri çalışması değildir.</figcaption>
-      </figure>
+      <HeroScene variant="mobilya" ads tilt={-1.5} />
     </div>,
     ...packages.map((p, i) => (
       <div key={p.id} className="mx-auto grid max-w-6xl items-center gap-12 px-5 pb-12 pt-14 lg:grid-cols-[1.05fr_1fr] lg:pt-20">
@@ -74,20 +76,12 @@ export default async function Home() {
               ))}
             </ul>
           ) : null}
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            {p.monthlyPriceKurus !== null && p.billingType === "subscription" ? (
-              <Link href={`/abonelik/${p.slug}`} className="ui bg-tabela px-8 py-4 text-lg text-murekkep hover:bg-beyaz">Abone ol</Link>
-            ) : p.monthlyPriceKurus !== null ? (
-              <Link href="/iletisim" className="ui bg-tabela px-8 py-4 text-lg text-murekkep hover:bg-beyaz">Teklif al</Link>
-            ) : null}
-            <Link href="/paketler" className="ui border-2 border-beyaz/50 px-8 py-4 text-lg hover:bg-beyaz hover:text-gece">Tüm paketler</Link>
+          <div className="mt-8">
+            <ContactPair surface="dark" message={packageWaMessage(p.name)} />
+            <p className="mt-5"><Link href="/paketler" className="ui underline underline-offset-4 hover:text-tabela">Tüm paketler</Link></p>
           </div>
         </div>
-        <figure className="relative mx-auto w-full max-w-xl pb-10 pr-4 lg:pb-14">
-          <div className={i % 2 === 0 ? "rotate-[-1.5deg]" : "rotate-[1.5deg]"}><SiteMock variant={variants[i % variants.length]} /></div>
-          {p.includesAds ? <div className="absolute -bottom-2 right-0 w-[62%] rotate-[2deg] shadow-[8px_8px_0_#f2b705]"><AdsMock /></div> : null}
-          <figcaption className="mt-6 text-sm text-beyaz/60">Örnek tasarım{p.includesAds ? " ve örnek reklam görünümü" : ""}. Müşteri çalışması değildir.</figcaption>
-        </figure>
+        <HeroScene variant={variants[i % variants.length]} ads={p.includesAds} tilt={i % 2 === 0 ? -1.5 : 1.5} />
       </div>
     )),
   ];
@@ -216,7 +210,7 @@ export default async function Home() {
         <div className="text-center">
           <h2 className="display text-3xl text-emaye sm:text-4xl">Sık sorulanlar</h2>
           <p className="mt-4 text-soluk">
-            Cevabını bulamadığınız soru için <Link href="/iletisim" className="underline underline-offset-4">bize yazın</Link>.
+            Cevabını bulamadığınız soru için <Link href="/iletisim" className="underline underline-offset-4">bizi arayın ya da WhatsApp&apos;tan yazın</Link>.
           </p>
         </div>
         <div className="mt-10">

@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { FloatingContact } from "@/components/floating-contact";
 import { Kepenk } from "@/components/kepenk";
 import { PageTransition } from "@/components/page-transition";
 import { SiteFooter } from "@/components/site-footer";
@@ -17,12 +18,6 @@ const organizationJsonLd = {
 export default function SiteLayout({ children }: LayoutProps<"/">) {
   return (
     <>
-      {/* Kepenk açılışı oturum başına bir kez: gösterildiyse sonraki yüklemelerde gizlenir (boyamadan önce çalışır). */}
-      <script
-        dangerouslySetInnerHTML={{
-          __html: "try{if(sessionStorage.getItem('kepenk')){document.documentElement.classList.add('kepenk-yok')}else{sessionStorage.setItem('kepenk','1')}}catch(e){}",
-        }}
-      />
       <Kepenk />
       <Suspense fallback={null}>
         <PageTransition />
@@ -34,10 +29,11 @@ export default function SiteLayout({ children }: LayoutProps<"/">) {
         İçeriğe geç
       </a>
       <SiteHeader />
-      <main id="icerik" className="flex-1">
+      <main id="icerik" className="flex-1 overflow-x-clip">
         {children}
       </main>
       <SiteFooter />
+      <FloatingContact />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(organizationJsonLd) }} />
     </>
   );

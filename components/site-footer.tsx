@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { footerPages, legalPages, services, site } from "@/lib/site";
+import { ContactPair } from "./contact-buttons";
 import { Logo } from "./logo";
 
 function Col({ title, items }: { title: string; items: { href: string; label: string }[] }) {
@@ -26,9 +27,8 @@ export function SiteFooter() {
           <p className="mt-5 max-w-xs text-beyaz/80">
             Web sitenizi kurar, Google reklamınızı yönetiriz. Reklam bütçesi sizin, hizmet bedeli bizim. Alan adınız her zaman sizde kalır.
           </p>
-          <Link href="/giris" className="ui mt-6 inline-block border border-beyaz/40 px-5 py-2.5 hover:bg-beyaz hover:text-gece">
-            Müşteri girişi
-          </Link>
+          <div className="mt-6"><ContactPair surface="dark" size="sm" /></div>
+          <Link href="/giris" className="ui mt-5 inline-block text-beyaz/80 underline underline-offset-4 hover:text-beyaz">Müşteri girişi</Link>
         </div>
         <Col title="Hizmetler" items={services} />
         <Col title="Kaşif" items={footerPages} />

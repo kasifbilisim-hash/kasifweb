@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Archivo, Figtree } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { site } from "@/lib/site";
 
@@ -35,7 +36,14 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="tr" suppressHydrationWarning className={`${archivo.variable} ${figtree.variable}`}>
-      <body className="flex min-h-screen flex-col">{children}</body>
+      <body className="flex min-h-screen flex-col">
+        {/* Kepenk açılışı oturum başına bir kez: gösterildiyse sonraki yüklemelerde gizlenir (boyamadan önce çalışır).
+            Kök yerleşimde olmalı: React, istemcide yeniden çizilen yerleşimdeki script etiketi için uyarı verir. */}
+        <Script id="kepenk-oturum" strategy="beforeInteractive">
+          {"try{if(sessionStorage.getItem('kepenk')){document.documentElement.classList.add('kepenk-yok')}else{sessionStorage.setItem('kepenk','1')}}catch(e){}"}
+        </Script>
+        {children}
+      </body>
     </html>
   );
 }

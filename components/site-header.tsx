@@ -1,10 +1,14 @@
 import Link from "next/link";
+import { getContact } from "@/lib/contact";
 import { nav, services } from "@/lib/site";
+import { PhoneIcon, WhatsAppIcon } from "./contact-buttons";
 import { Logo } from "./logo";
 
-const linkClass = "ui rounded-sm px-3 py-2 text-[0.95rem] hover:bg-kagit hover:text-emaye";
+const linkClass = "ui whitespace-nowrap rounded-sm px-3 py-2 text-[0.95rem] hover:bg-kagit hover:text-emaye";
 
 export function SiteHeader() {
+  const c = getContact();
+  const wa = c.wa();
   const rest = nav.filter((n) => n.href !== "/hizmetler");
   return (
     <header className="sticky top-0 z-40 border-b border-cizgi bg-beyaz">
@@ -58,9 +62,25 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-3">
           <Link href="/giris" className="ui hidden text-[0.95rem] hover:text-emaye sm:inline lg:hidden">Giriş</Link>
-          <Link href="/paketler" className="ui bg-tabela px-5 py-2.5 text-[0.95rem] text-murekkep hover:bg-murekkep hover:text-beyaz">
-            Paketleri gör
-          </Link>
+          {c.tel ? (
+            <>
+              <a href={c.tel} className="ui hidden items-center gap-2 whitespace-nowrap text-[0.95rem] hover:text-emaye xl:inline-flex">
+                <PhoneIcon className="h-4 w-4" />
+                {c.phoneText}
+              </a>
+              <a href={c.tel} aria-label={`Ara: ${c.phoneText}`} className="hidden h-10 w-10 place-items-center border-2 border-murekkep hover:bg-murekkep hover:text-beyaz md:grid xl:hidden">
+                <PhoneIcon className="h-4 w-4" />
+              </a>
+            </>
+          ) : null}
+          {wa ? (
+            <a href={wa} target="_blank" rel="noopener noreferrer" className="ui hidden items-center gap-2 whitespace-nowrap bg-emaye px-4 py-2.5 text-[0.95rem] text-beyaz hover:bg-murekkep sm:inline-flex">
+              <WhatsAppIcon className="h-4 w-4" />
+              WhatsApp<span className="sr-only"> (yeni sekmede açılır)</span>
+            </a>
+          ) : (
+            <Link href="/iletisim" className="ui bg-tabela px-5 py-2.5 text-[0.95rem] text-murekkep hover:bg-murekkep hover:text-beyaz">İletişim</Link>
+          )}
 
           {/* Mobil menü: JavaScript gerektirmez */}
           <details className="group relative lg:hidden">
